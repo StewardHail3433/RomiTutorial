@@ -14,21 +14,38 @@ public class DriveCommand extends CommandBase {
      * @param zRotation The robot's rotation rate around the Z axis [-1.0..1.0]. Counterclockwise is
      *     positive.
      */
-    public DriveCommand(RomiDrivetrain drive, DoubleSupplier xSpeed, DoubleSupplier zRotation) {}
+    private final RomiDrivetrain drivetrain;
+    private final DoubleSupplier xSpeedSupplier;
+    private final DoubleSupplier zRotationSupplier;
+
+    public DriveCommand(RomiDrivetrain drive, DoubleSupplier xSpeed, DoubleSupplier zRotation) {
+        drivetrain = drive;
+        xSpeedSupplier = xSpeed;
+        zRotationSupplier = zRotation;
+        addRequirements(drive);  // Make sure the command requires the drivetrain subsystem.
+    }
     
-    
+    // Called when the command is initially scheduled.
     @Override
     public void initialize() {}
     
-    
+    // Called every time the scheduler runs while the command is scheduled.
     @Override
-    public void execute() {}
+    public void execute() {
+        double xSpeed = xSpeedSupplier.getAsDouble();
+        double zRotation = zRotationSupplier.getAsDouble();
+        System.out.println(xSpeed);
+        //Drivetrain control logic
+        drivetrain.arcadeDrive(xSpeed, zRotation);
+    }
     
-    
+    // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {}
     
-    
-    //@Override
-    //public boolean isFinished() {}
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }
