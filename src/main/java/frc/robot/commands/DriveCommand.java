@@ -34,9 +34,8 @@ public class DriveCommand extends CommandBase {
     public void execute() {
         double xSpeed = xSpeedSupplier.getAsDouble();
         double zRotation = zRotationSupplier.getAsDouble();
-        System.out.println(xSpeed);
         //Drivetrain control logic
-        drivetrain.arcadeDrive(xSpeed, zRotation);
+        drivetrain.arcadeDrive(xSpeed, -zRotation);
     }
     
     // Called once the command ends or is interrupted.
