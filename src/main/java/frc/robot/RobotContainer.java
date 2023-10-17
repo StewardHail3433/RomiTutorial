@@ -4,10 +4,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.RomiDrivetrain;
+import frc.robot.subsystems.ServoSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -23,6 +25,9 @@ public class RobotContainer {
   private final XboxController m_controller = new XboxController(0);
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDrivetrain);
   private final DriveCommand m_driveCommand = new DriveCommand(m_romiDrivetrain, () -> -m_controller.getLeftY(), () -> m_controller.getLeftX());
+  
+  private final Servo m_servo = new Servo(0);
+  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
