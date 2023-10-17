@@ -36,7 +36,7 @@ public class RobotContainer {
     configureButtonBindings();
 
     m_romiDrivetrain.setDefaultCommand(m_driveCommand);
-    
+    m_servoSubsystem.setDefaultCommand(m_servoControl);
 
   }
 
