@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ServoSubsystem extends SubsystemBase {
-    private Servo m_servo;
+    private final Servo m_servo;
     /**
      * Creates a servo subsystem
      *
