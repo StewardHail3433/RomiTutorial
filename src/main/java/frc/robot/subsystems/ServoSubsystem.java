@@ -11,7 +11,7 @@ public class ServoSubsystem extends SubsystemBase {
      * @param channel PWM channel ID for the servo
      */
     public ServoSubsystem(int channel) {
-        
+        m_servo = new Servo(channel);
     }
 
 
@@ -21,7 +21,7 @@ public class ServoSubsystem extends SubsystemBase {
      * @param angle desired angle in percentage of total range. [0..1.0]. 0 is full counterclockwise.
      *     1.0 is full clockwise.
      */
-    public void set(double position) {
-        m_servo.setAngle(position);
+    public void set(double angle) {
+        m_servo.setAngle(angle);
     }
 }
