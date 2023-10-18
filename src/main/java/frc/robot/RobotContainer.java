@@ -21,13 +21,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final RomiDrivetrain m_romiDrivetrain = new RomiDrivetrain();
-  private final ServoSubsystem m_servoSubsystem = new ServoSubsystem(0);
+  private final ServoSubsystem m_servoSubsystem = new ServoSubsystem(3);
 
   private final XboxController m_controller = new XboxController(0);
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDrivetrain);
   private final DriveCommand m_driveCommand = new DriveCommand(m_romiDrivetrain, () -> -m_controller.getLeftY(), () -> m_controller.getLeftX());
-  private final ServoControl m_servoControlY = new ServoControl(m_servoSubsystem, () -> -m_controller.getRightY());
-  private final ServoControl m_servoControlX = new ServoControl(m_servoSubsystem, () -> -m_controller.getRightX());
+  private final ServoControl m_servoControlY = new ServoControl(m_servoSubsystem, () -> m_controller.getRightY());
+  private final ServoControl m_servoControlX = new ServoControl(m_servoSubsystem, () -> m_controller.getRightX());
   
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

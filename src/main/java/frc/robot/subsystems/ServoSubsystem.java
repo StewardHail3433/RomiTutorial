@@ -21,7 +21,7 @@ public class ServoSubsystem extends SubsystemBase {
      * @param angle desired angle in percentage of total range. [0..1.0]. 0 is full counterclockwise.
      *     1.0 is full clockwise.
      */
-    public void set(double angle) {
-        m_servo.setAngle(angle);
+    public void set(double pos) {
+        m_servo.set(pos);
     }
 }

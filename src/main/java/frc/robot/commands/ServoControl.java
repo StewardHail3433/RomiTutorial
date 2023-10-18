@@ -19,6 +19,8 @@ public class ServoControl extends CommandBase {
     public ServoControl(ServoSubsystem servoSubsystem, DoubleSupplier position) {
         CServoSubsystem = servoSubsystem;
         pos = position;
+        CServoSubsystem.set(1);
+        addRequirements(servoSubsystem);
     }
 
     @Override
