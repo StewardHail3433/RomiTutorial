@@ -13,13 +13,12 @@ public class ServoControl extends CommandBase {
      * @param position The servo's position [-1.0..1.0]. -1.0 corresponds to max counterclockwise
      *     position.
      */
-    private final ServoSubsystem CServoSubsystem;
-    private final DoubleSupplier pos;
+    private final ServoSubsystem m_servoSubsystem;
+    private final DoubleSupplier m_pos;
 
     public ServoControl(ServoSubsystem servoSubsystem, DoubleSupplier position) {
-        CServoSubsystem = servoSubsystem;
-        pos = position;
-        CServoSubsystem.set(1);
+        m_servoSubsystem = servoSubsystem;
+        m_pos = position;
         addRequirements(servoSubsystem);
     }
 
@@ -29,8 +28,8 @@ public class ServoControl extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double position = pos.getAsDouble();
-        CServoSubsystem.set(position);
+        double position = m_pos.getAsDouble();
+        m_servoSubsystem.set(position);
     }
     
     // Called once the command ends or is interrupted.

@@ -22,6 +22,10 @@ public class ServoSubsystem extends SubsystemBase {
      *     1.0 is full clockwise.
      */
     public void set(double pos) {
-        m_servo.set(pos);
+        if (pos >= 0.0 && pos <= 1.0) {
+            m_servo.set(pos);
+        } else {
+
+        }
     }
 }
