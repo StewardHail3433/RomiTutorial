@@ -29,7 +29,6 @@ public class ServoControl extends CommandBase {
     @Override
     public void execute() {
         double position = m_pos.getAsDouble();
-        System.out.println("Setting servo position: " + position);
         m_servoSubsystem.set(position);
     }
     

@@ -1,14 +1,20 @@
 {
-  "NTProvider": {
-    "types": {
-      "/FMSInfo": "FMSInfo"
-    }
-  },
-  "NetworkTables": {
-    "transitory": {
-      "MySubsystems": {
-        "open": true
+  "HALProvider": {
+    "Other Devices": {
+      "RomiGyro": {
+        "header": {
+          "open": true
+        }
       }
     }
+  },
+  "NTProvider": {
+    "types": {
+      "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+    }
+  },
+  "NetworkTables View": {
+    "visible": false
   }
 }

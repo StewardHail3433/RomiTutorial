@@ -7,9 +7,12 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.romi.RomiGyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class RomiDrivetrain extends SubsystemBase {
+  private final RomiGyro m_gyro = new RomiGyro();
+  
   private static final double kCountsPerRevolution = 1440.0;
   private static final double kWheelDiameterInch = 2.75591; // 70 mm
 
@@ -63,4 +66,14 @@ public class RomiDrivetrain extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
+
+  /**
+  *
+  * @return current yaw angle in degrees [0...359].
+  */
+  public double getYaw() {
+    return m_gyro.getAngle() < 0 ? (m_gyro.getAngle() + 360) : m_gyro.getAngle();
+  }
+
+
 }
