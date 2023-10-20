@@ -21,13 +21,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final RomiDrivetrain m_romiDrivetrain = new RomiDrivetrain();
-  private final ServoSubsystem m_servoSubsystem = new ServoSubsystem(3);
+  private final ServoSubsystem m_servoSubsystemY = new ServoSubsystem(3);
+  private final ServoSubsystem m_servoSubsystemX = new ServoSubsystem(4);
 
   private final XboxController m_controller = new XboxController(0);
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDrivetrain);
   private final DriveCommand m_driveCommand = new DriveCommand(m_romiDrivetrain, () -> -m_controller.getLeftY(), () -> m_controller.getLeftX());
-  private final ServoControl m_servoControlY = new ServoControl(m_servoSubsystem, () -> m_controller.getRightY());
-  private final ServoControl m_servoControlX = new ServoControl(m_servoSubsystem, () -> m_controller.getRightX());
+  private final ServoControl m_servoControlY = new ServoControl(m_servoSubsystemY, () -> m_controller.getRightY());
+  private final ServoControl m_servoControlX = new ServoControl(m_servoSubsystemX, () -> m_controller.getRightX());
   
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -36,8 +37,8 @@ public class RobotContainer {
     configureButtonBindings();
 
     m_romiDrivetrain.setDefaultCommand(m_driveCommand);
-    m_servoSubsystem.setDefaultCommand(m_servoControlY);
-    m_servoSubsystem.setDefaultCommand(m_servoControlX);
+    m_servoSubsystemY.setDefaultCommand(m_servoControlY);
+    m_servoSubsystemX.setDefaultCommand(m_servoControlX);
 
   }
 

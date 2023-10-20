@@ -10,11 +10,16 @@
   },
   "NTProvider": {
     "types": {
+      "/FMSInfo": "FMSInfo",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
     }
   },
-  "NetworkTables View": {
-    "visible": false
+  "NetworkTables": {
+    "transitory": {
+      "MySubsystems": {
+        "open": true
+      }
+    }
   }
 }

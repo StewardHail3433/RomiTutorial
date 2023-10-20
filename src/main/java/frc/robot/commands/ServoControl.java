@@ -42,6 +42,8 @@ public class ServoControl extends CommandBase {
         return false;
     }
 
-
+    public void printPos() {
+        System.out.println(m_pos.getAsDouble());
+    }
 
 }
