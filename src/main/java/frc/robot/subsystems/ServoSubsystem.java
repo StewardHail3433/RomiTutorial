@@ -20,7 +20,7 @@ public class ServoSubsystem extends SubsystemBase {
         //create table to see the value of pos in the sim
         NetworkTableInstance inst = NetworkTableInstance.getDefault();
         NetworkTable table = inst.getTable("MySubsystems");
-        posEntry = table.getEntry("servo_position"); 
+        posEntry = table.getEntry("servo_position" + channel); 
     }
 
 
