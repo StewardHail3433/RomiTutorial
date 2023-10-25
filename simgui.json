@@ -19,6 +19,12 @@
     "transitory": {
       "MySubsystems": {
         "open": true
+      },
+      "RotateCommand": {
+        "open": true
+      },
+      "ServoSubsystem": {
+        "open": true
       }
     }
   }

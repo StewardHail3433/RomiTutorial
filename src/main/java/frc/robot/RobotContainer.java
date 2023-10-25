@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Rotate;
 import frc.robot.commands.ServoControl;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.RomiDrivetrain;
@@ -25,11 +26,12 @@ public class RobotContainer {
   private final ServoSubsystem m_servoSubsystemX = new ServoSubsystem(2);
 
   private final XboxController m_controller = new XboxController(0);
+
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDrivetrain);
   private final DriveCommand m_driveCommand = new DriveCommand(m_romiDrivetrain, () -> -m_controller.getLeftY(), () -> m_controller.getLeftX());
   private final ServoControl m_servoControlY = new ServoControl(m_servoSubsystemY, () -> m_controller.getRightY());
   private final ServoControl m_servoControlX = new ServoControl(m_servoSubsystemX, () -> -m_controller.getRightX());
-  
+  private final Rotate m_rotate;
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -37,6 +39,11 @@ public class RobotContainer {
     configureButtonBindings();
 
     m_romiDrivetrain.setDefaultCommand(m_driveCommand);
+    double degree = 23;
+
+    m_rotate = new Rotate(m_romiDrivetrain, degree);
+    System.out.println(degree);
+    m_romiDrivetrain.setDefaultCommand(m_rotate);
     m_servoSubsystemY.setDefaultCommand(m_servoControlY);
     m_servoSubsystemX.setDefaultCommand(m_servoControlX);
 
@@ -48,7 +55,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
