@@ -32,8 +32,8 @@ public class DriveCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double xSpeed = xSpeedSupplier.getAsDouble();
-        double zRotation = zRotationSupplier.getAsDouble();
+        double xSpeed = xSpeedSupplier.getAsDouble() * 0.4;
+        double zRotation = zRotationSupplier.getAsDouble() * 0.4;
         //Drivetrain control logic
         drivetrain.arcadeDrive(xSpeed, -zRotation);
     }

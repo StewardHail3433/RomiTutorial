@@ -68,9 +68,10 @@ public class RomiDrivetrain extends SubsystemBase {
   }
 
   /**
-  *
-  * @return current yaw angle in degrees [0...359].
-  */
+   * @return current yaw angle in degrees. Value is cumulative. E.g. if the robot starts at 0 and
+   *     rotates 2x clockwise (when viewed from the top), the reported Yaw is 2*360.
+   */
+
   public double getYaw() {
     return m_gyro.getAngle() < 0 ? (m_gyro.getAngle() + 360) : m_gyro.getAngle();
   }
