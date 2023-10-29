@@ -51,11 +51,12 @@ public class Rotate extends CommandBase{
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    /*if (StartingYaw + Math.abs(RotateDegrees) > drivetrain.getYaw() - 5 &&
+    if (StartingYaw + Math.abs(RotateDegrees) > drivetrain.getYaw() - 5 &&
         StartingYaw + Math.abs(RotateDegrees) < drivetrain.getYaw() + 5) {
+      //if(RotateDegrees == 0) {
         return true;
-    } else { */
-        return true;
-    //}
+    } else { 
+        return false;
+    }
   }
 }

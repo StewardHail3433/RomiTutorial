@@ -12,6 +12,7 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.RomiDrivetrain;
 import frc.robot.subsystems.ServoSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -25,13 +26,12 @@ public class RobotContainer {
   private final ServoSubsystem m_servoSubsystemY = new ServoSubsystem(3);
   private final ServoSubsystem m_servoSubsystemX = new ServoSubsystem(2);
 
-  private final XboxController m_controller = new XboxController(0);
+  private final CommandXboxController m_controller = new CommandXboxController(0);
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDrivetrain);
   private final DriveCommand m_driveCommand = new DriveCommand(m_romiDrivetrain, () -> -m_controller.getLeftY(), () -> m_controller.getLeftX());
   private final ServoControl m_servoControlY = new ServoControl(m_servoSubsystemY, () -> m_controller.getRightY());
   private final ServoControl m_servoControlX = new ServoControl(m_servoSubsystemX, () -> -m_controller.getRightX());
-  private final Rotate m_rotate;
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -39,11 +39,6 @@ public class RobotContainer {
     configureButtonBindings();
 
     m_romiDrivetrain.setDefaultCommand(m_driveCommand);
-    double degree = 23;
-
-    m_rotate = new Rotate(m_romiDrivetrain, degree);
-    System.out.println(degree);
-    m_romiDrivetrain.setDefaultCommand(m_rotate);
     m_servoSubsystemY.setDefaultCommand(m_servoControlY);
     m_servoSubsystemX.setDefaultCommand(m_servoControlX);
 
@@ -56,7 +51,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
+      m_controller.povUp().onTrue(new Rotate(m_romiDrivetrain, 0).until(() -> m_controller.getHID().getPOV() == -1));
+      m_controller.povLeft().onTrue(new Rotate(m_romiDrivetrain, -90).until(() -> m_controller.getHID().getPOV() == -1));
+      m_controller.povDown().onTrue(new Rotate(m_romiDrivetrain, 180).until(() -> m_controller.getHID().getPOV() == -1));
+      m_controller.povRight().onTrue(new Rotate(m_romiDrivetrain, 90).until(() -> m_controller.getHID().getPOV() == -1));
   }
 
   /**
