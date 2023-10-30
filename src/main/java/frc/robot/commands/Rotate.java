@@ -2,9 +2,6 @@ package frc.robot.commands;
 
 import java.lang.Math;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.RomiDrivetrain;
 
@@ -18,15 +15,12 @@ public class Rotate extends CommandBase{
 
   private final RomiDrivetrain drivetrain;
   private final double RotateDegrees;
+  private double zRotation;
   private double StartingYaw;
-  private NetworkTableEntry degreesEntry;
 
   public Rotate(RomiDrivetrain drive, double degrees) {
     drivetrain = drive;
     RotateDegrees = degrees;
-    NetworkTableInstance inst = NetworkTableInstance.getDefault();
-    NetworkTable table = inst.getTable("RotateCommand");
-    degreesEntry = table.getEntry("degrees"); 
     addRequirements(drive);
   }
 
@@ -39,9 +33,13 @@ public class Rotate extends CommandBase{
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    drivetrain.arcadeDrive(0, (RotateDegrees/359));
-    degreesEntry.setDouble(RotateDegrees);
+    zRotation = 0;
+    if (RotateDegrees > 5) {
+      zRotation = -2.5;
+    } else if (RotateDegrees < -5) {
+      zRotation = 2.5;
+    }
+    drivetrain.arcadeDrive(0, zRotation);
   }
 
   // Called once the command ends or is interrupted.
@@ -51,12 +49,6 @@ public class Rotate extends CommandBase{
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (StartingYaw + Math.abs(RotateDegrees) > drivetrain.getYaw() - 5 &&
-        StartingYaw + Math.abs(RotateDegrees) < drivetrain.getYaw() + 5) {
-      //if(RotateDegrees == 0) {
-        return true;
-    } else { 
-        return false;
-    }
+        return StartingYaw + Math.abs(RotateDegrees) > drivetrain.getYaw() - 5 && StartingYaw + Math.abs(RotateDegrees) < drivetrain.getYaw() + 5;
   }
 }
