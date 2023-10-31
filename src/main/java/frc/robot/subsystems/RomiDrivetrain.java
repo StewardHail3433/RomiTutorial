@@ -73,7 +73,7 @@ public class RomiDrivetrain extends SubsystemBase {
    */
 
   public double getYaw() {
-    return m_gyro.getAngle() < 0 ? (m_gyro.getAngle() + 360) : m_gyro.getAngle();
+    return m_gyro.getAngleZ();
   }
 
 

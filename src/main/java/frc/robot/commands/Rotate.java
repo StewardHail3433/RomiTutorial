@@ -15,6 +15,7 @@ public class Rotate extends CommandBase{
 
   private final RomiDrivetrain drivetrain;
   private final double RotateDegrees;
+  private double yawError;
   private double zRotation;
   private double StartingYaw;
 
@@ -34,9 +35,10 @@ public class Rotate extends CommandBase{
   @Override
   public void execute() {
     zRotation = 0;
-    if (RotateDegrees > 5) {
+    yawError = (StartingYaw + RotateDegrees) - drivetrain.getYaw();
+    if (yawError > 5) {
       zRotation = -2.5;
-    } else if (RotateDegrees < -5) {
+    } else if (yawError < -5) {
       zRotation = 2.5;
     }
     drivetrain.arcadeDrive(0, zRotation);
@@ -49,6 +51,6 @@ public class Rotate extends CommandBase{
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-        return StartingYaw + Math.abs(RotateDegrees) > drivetrain.getYaw() - 5 && StartingYaw + Math.abs(RotateDegrees) < drivetrain.getYaw() + 5;
+        return StartingYaw + RotateDegrees > drivetrain.getYaw() - 5 && StartingYaw + RotateDegrees < drivetrain.getYaw() + 5;
   }
 }
